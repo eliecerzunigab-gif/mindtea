@@ -125,10 +125,53 @@
                     </div>
 
                     <div class="seccion-cuestionario">
-                        <h3>📥 Descargar Material</h3>
+                        <h3>🔄 Probar Pictogramas en Línea</h3>
                         <div class="pregunta">
-                            <p>Haz clic en el botón para descargar el set completo de pictogramas:</p>
-                            <div class="form-actions">
+                            <p>Explora algunos pictogramas de ejemplo y crea tu propia secuencia visual:</p>
+                            
+                            <div class="pictogramas-interactivos">
+                                <div class="pictogramas-disponibles">
+                                    <h4>Pictogramas Disponibles:</h4>
+                                    <div class="pictogramas-grid">
+                                        <div class="pictograma-item" data-picto="levantarse">
+                                            <div class="pictograma-icon">🛏️</div>
+                                            <span>Levantarse</span>
+                                        </div>
+                                        <div class="pictograma-item" data-picto="vestirse">
+                                            <div class="pictograma-icon">👕</div>
+                                            <span>Vestirse</span>
+                                        </div>
+                                        <div class="pictograma-item" data-picto="desayunar">
+                                            <div class="pictograma-icon">🥛</div>
+                                            <span>Desayunar</span>
+                                        </div>
+                                        <div class="pictograma-item" data-picto="lavarse-dientes">
+                                            <div class="pictograma-icon">🦷</div>
+                                            <span>Lavarse dientes</span>
+                                        </div>
+                                        <div class="pictograma-item" data-picto="ir-colegio">
+                                            <div class="pictograma-icon">🏫</div>
+                                            <span>Ir al colegio</span>
+                                        </div>
+                                        <div class="pictograma-item" data-picto="jugar">
+                                            <div class="pictograma-icon">🎮</div>
+                                            <span>Jugar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="secuencia-creada">
+                                    <h4>Tu Secuencia de Rutina:</h4>
+                                    <div class="secuencia-container" id="secuencia-container">
+                                        <p class="secuencia-vacia">Arrastra los pictogramas aquí para crear tu rutina</p>
+                                    </div>
+                                    <button class="btn btn-secondary" onclick="limpiarSecuencia()">
+                                        <i class="fas fa-trash"></i> Limpiar Secuencia
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions" style="margin-top: 2rem;">
                                 <button class="btn btn-primary btn-large" onclick="descargarRecurso('pictogramas-completo')">
                                     <i class="fas fa-download"></i>
                                     Descargar Set Completo (PDF)
@@ -184,6 +227,8 @@
 
     <script src="script.js"></script>
     <script>
+        let secuencia = [];
+        
         function descargarRecurso(tipo) {
             let nombreArchivo = 'Set_Pictogramas_Rutinas_MindTea.pdf';
             let mensaje = 'Set de Pictogramas de Rutinas';
@@ -200,6 +245,62 @@
             showNotification(`✅ Descarga iniciada: ${mensaje}`, 'success');
             
             console.log(`Descarga iniciada: ${mensaje}`);
+        }
+        
+        // Funcionalidad interactiva de pictogramas
+        document.addEventListener('DOMContentLoaded', function() {
+            const pictogramasItems = document.querySelectorAll('.pictograma-item');
+            const secuenciaContainer = document.getElementById('secuencia-container');
+            
+            pictogramasItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const pictoData = this.getAttribute('data-picto');
+                    const pictoText = this.querySelector('span').textContent;
+                    const pictoIcon = this.querySelector('.pictograma-icon').textContent;
+                    
+                    agregarPictogramaASecuencia(pictoData, pictoText, pictoIcon);
+                });
+            });
+        });
+        
+        function agregarPictogramaASecuencia(pictoData, pictoText, pictoIcon) {
+            secuencia.push({ data: pictoData, text: pictoText, icon: pictoIcon });
+            actualizarSecuenciaVisual();
+        }
+        
+        function actualizarSecuenciaVisual() {
+            const secuenciaContainer = document.getElementById('secuencia-container');
+            
+            if (secuencia.length === 0) {
+                secuenciaContainer.innerHTML = '<p class="secuencia-vacia">Arrastra los pictogramas aquí para crear tu rutina</p>';
+                return;
+            }
+            
+            let html = '';
+            secuencia.forEach((picto, index) => {
+                html += `
+                    <div class="pictograma-secuencia" data-index="${index}">
+                        <div class="pictograma-icon">${picto.icon}</div>
+                        <span>${picto.text}</span>
+                        <button class="btn-eliminar" onclick="eliminarPictograma(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            secuenciaContainer.innerHTML = html;
+        }
+        
+        function eliminarPictograma(index) {
+            secuencia.splice(index, 1);
+            actualizarSecuenciaVisual();
+        }
+        
+        function limpiarSecuencia() {
+            secuencia = [];
+            actualizarSecuenciaVisual();
+            showNotification('✅ Secuencia limpiada correctamente', 'success');
         }
     </script>
 </body>

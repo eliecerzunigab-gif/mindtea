@@ -122,10 +122,77 @@
                     </div>
 
                     <div class="seccion-cuestionario">
-                        <h3>📥 Descargar Termómetro</h3>
+                        <h3>🔄 Probar Termómetro en Línea</h3>
                         <div class="pregunta">
-                            <p>Haz clic en el botón para descargar el termómetro de emociones:</p>
-                            <div class="form-actions">
+                            <p>Usa el termómetro interactivo para identificar y medir tus emociones:</p>
+                            
+                            <div class="termometro-interactivo">
+                                <div class="termometro-visual">
+                                    <div class="termometro-escala">
+                                        <div class="nivel-termometro" id="nivel-termometro" data-nivel="1"></div>
+                                        <div class="marcas-termometro">
+                                            <div class="marca" data-nivel="5">5</div>
+                                            <div class="marca" data-nivel="4">4</div>
+                                            <div class="marca" data-nivel="3">3</div>
+                                            <div class="marca" data-nivel="2">2</div>
+                                            <div class="marca" data-nivel="1">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="info-nivel" id="info-nivel">
+                                        <h4>Nivel 1 - Tranquilo</h4>
+                                        <p>Me siento bien y relajado</p>
+                                        <div class="estrategias-nivel">
+                                            <strong>Estrategias recomendadas:</strong>
+                                            <ul>
+                                                <li>Respiración profunda</li>
+                                                <li>Contar hasta 10</li>
+                                                <li>Hablar sobre sentimientos</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="controles-termometro">
+                                    <h4>Selecciona tu nivel emocional:</h4>
+                                    <div class="niveles-emocionales">
+                                        <button class="btn-nivel" data-nivel="1" onclick="seleccionarNivel(1)">
+                                            <span class="emoji-nivel">🟢</span>
+                                            <span>Nivel 1 - Tranquilo</span>
+                                        </button>
+                                        <button class="btn-nivel" data-nivel="2" onclick="seleccionarNivel(2)">
+                                            <span class="emoji-nivel">🟡</span>
+                                            <span>Nivel 2 - Alerta</span>
+                                        </button>
+                                        <button class="btn-nivel" data-nivel="3" onclick="seleccionarNivel(3)">
+                                            <span class="emoji-nivel">🟠</span>
+                                            <span>Nivel 3 - Molesto</span>
+                                        </button>
+                                        <button class="btn-nivel" data-nivel="4" onclick="seleccionarNivel(4)">
+                                            <span class="emoji-nivel">🔴</span>
+                                            <span>Nivel 4 - Enojado</span>
+                                        </button>
+                                        <button class="btn-nivel" data-nivel="5" onclick="seleccionarNivel(5)">
+                                            <span class="emoji-nivel">🟣</span>
+                                            <span>Nivel 5 - Explosivo</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="registro-emociones">
+                                    <h4>Registra tu emoción:</h4>
+                                    <div class="form-registro">
+                                        <input type="text" id="emocion-descripcion" placeholder="Describe qué estás sintiendo...">
+                                        <button class="btn btn-primary" onclick="registrarEmocion()">
+                                            <i class="fas fa-save"></i> Registrar
+                                        </button>
+                                    </div>
+                                    <div class="historial-emociones" id="historial-emociones">
+                                        <p class="sin-registros">Aún no has registrado emociones</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions" style="margin-top: 2rem;">
                                 <button class="btn btn-primary btn-large" onclick="descargarRecurso('termometro-completo')">
                                     <i class="fas fa-download"></i>
                                     Descargar Termómetro (PDF)
@@ -202,6 +269,9 @@
 
     <script src="script.js"></script>
     <script>
+        let nivelActual = 1;
+        let historialEmociones = [];
+        
         function descargarRecurso(tipo) {
             let nombreArchivo = 'Termometro_Emociones_MindTea.pdf';
             let mensaje = 'Termómetro de Emociones';
@@ -219,6 +289,174 @@
             
             console.log(`Descarga iniciada: ${mensaje}`);
         }
+        
+        // Funcionalidad interactiva del termómetro
+        function seleccionarNivel(nivel) {
+            nivelActual = nivel;
+            actualizarTermometroVisual();
+            actualizarInfoNivel();
+            actualizarBotonesActivos();
+        }
+        
+        function actualizarTermometroVisual() {
+            const nivelTermometro = document.getElementById('nivel-termometro');
+            const altura = (nivelActual / 5) * 100;
+            nivelTermometro.style.height = `${altura}%`;
+            nivelTermometro.setAttribute('data-nivel', nivelActual);
+            
+            // Cambiar color según el nivel
+            const colores = {
+                1: '#4CAF50',
+                2: '#FFC107',
+                3: '#FF9800',
+                4: '#F44336',
+                5: '#E91E63'
+            };
+            nivelTermometro.style.backgroundColor = colores[nivelActual];
+        }
+        
+        function actualizarInfoNivel() {
+            const infoNivel = document.getElementById('info-nivel');
+            const niveles = {
+                1: {
+                    titulo: 'Nivel 1 - Tranquilo',
+                    descripcion: 'Me siento bien y relajado',
+                    estrategias: [
+                        'Respiración profunda',
+                        'Contar hasta 10',
+                        'Hablar sobre sentimientos',
+                        'Actividades tranquilas'
+                    ]
+                },
+                2: {
+                    titulo: 'Nivel 2 - Alerta',
+                    descripcion: 'Estoy atento y un poco nervioso',
+                    estrategias: [
+                        'Reconocer la emoción',
+                        'Respiración consciente',
+                        'Cambiar de postura',
+                        'Beber agua'
+                    ]
+                },
+                3: {
+                    titulo: 'Nivel 3 - Molesto',
+                    descripcion: 'Me siento incómodo o frustrado',
+                    estrategias: [
+                        'Tomar un descanso',
+                        'Usar objeto sensorial',
+                        'Cambiar de actividad',
+                        'Expresar necesidades'
+                    ]
+                },
+                4: {
+                    titulo: 'Nivel 4 - Enojado',
+                    descripcion: 'Estoy muy molesto o enfadado',
+                    estrategias: [
+                        'Espacio seguro',
+                        'Tiempo a solas',
+                        'Contacto físico seguro si es aceptado',
+                        'Expresión controlada'
+                    ]
+                },
+                5: {
+                    titulo: 'Nivel 5 - Explosivo',
+                    descripcion: 'Me siento fuera de control',
+                    estrategias: [
+                        'Garantizar seguridad',
+                        'Tiempo de recuperación',
+                        'Apoyo profesional si es necesario',
+                        'Reconexión posterior'
+                    ]
+                }
+            };
+            
+            const nivel = niveles[nivelActual];
+            let estrategiasHTML = nivel.estrategias.map(estrategia => `<li>${estrategia}</li>`).join('');
+            
+            infoNivel.innerHTML = `
+                <h4>${nivel.titulo}</h4>
+                <p>${nivel.descripcion}</p>
+                <div class="estrategias-nivel">
+                    <strong>Estrategias recomendadas:</strong>
+                    <ul>${estrategiasHTML}</ul>
+                </div>
+            `;
+        }
+        
+        function actualizarBotonesActivos() {
+            document.querySelectorAll('.btn-nivel').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.btn-nivel[data-nivel="${nivelActual}"]`).classList.add('active');
+        }
+        
+        function registrarEmocion() {
+            const descripcion = document.getElementById('emocion-descripcion').value.trim();
+            
+            if (!descripcion) {
+                showNotification('⚠️ Por favor, describe tu emoción', 'warning');
+                return;
+            }
+            
+            const registro = {
+                nivel: nivelActual,
+                descripcion: descripcion,
+                fecha: new Date().toLocaleString('es-ES')
+            };
+            
+            historialEmociones.unshift(registro);
+            actualizarHistorial();
+            document.getElementById('emocion-descripcion').value = '';
+            showNotification('✅ Emoción registrada correctamente', 'success');
+        }
+        
+        function actualizarHistorial() {
+            const historialContainer = document.getElementById('historial-emociones');
+            
+            if (historialEmociones.length === 0) {
+                historialContainer.innerHTML = '<p class="sin-registros">Aún no has registrado emociones</p>';
+                return;
+            }
+            
+            let html = '';
+            historialEmociones.forEach((registro, index) => {
+                const colores = {
+                    1: '#4CAF50',
+                    2: '#FFC107',
+                    3: '#FF9800',
+                    4: '#F44336',
+                    5: '#E91E63'
+                };
+                
+                html += `
+                    <div class="registro-item" style="border-left: 4px solid ${colores[registro.nivel]}">
+                        <div class="registro-header">
+                            <span class="nivel-indicador">Nivel ${registro.nivel}</span>
+                            <span class="fecha-registro">${registro.fecha}</span>
+                        </div>
+                        <p class="descripcion-emocion">${registro.descripcion}</p>
+                        <button class="btn-eliminar" onclick="eliminarRegistro(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            historialContainer.innerHTML = html;
+        }
+        
+        function eliminarRegistro(index) {
+            historialEmociones.splice(index, 1);
+            actualizarHistorial();
+            showNotification('✅ Registro eliminado', 'success');
+        }
+        
+        // Inicializar termómetro
+        document.addEventListener('DOMContentLoaded', function() {
+            actualizarTermometroVisual();
+            actualizarInfoNivel();
+            actualizarBotonesActivos();
+        });
     </script>
 </body>
 </html>

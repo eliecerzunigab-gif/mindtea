@@ -125,10 +125,59 @@
                     </div>
 
                     <div class="seccion-cuestionario">
-                        <h3>📥 Descargar Agenda</h3>
+                        <h3>🔄 Probar Agenda en Línea</h3>
                         <div class="pregunta">
-                            <p>Haz clic en el botón para descargar la agenda visual semanal:</p>
-                            <div class="form-actions">
+                            <p>Crea tu propia agenda visual semanal interactiva:</p>
+                            
+                            <div class="agenda-interactiva">
+                                <div class="dias-semana">
+                                    <h4>Selecciona un día:</h4>
+                                    <div class="dias-grid">
+                                        <button class="btn-dia" data-dia="lunes">Lunes</button>
+                                        <button class="btn-dia" data-dia="martes">Martes</button>
+                                        <button class="btn-dia" data-dia="miercoles">Miércoles</button>
+                                        <button class="btn-dia" data-dia="jueves">Jueves</button>
+                                        <button class="btn-dia" data-dia="viernes">Viernes</button>
+                                        <button class="btn-dia" data-dia="sabado">Sábado</button>
+                                        <button class="btn-dia" data-dia="domingo">Domingo</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="agenda-dia" id="agenda-dia">
+                                    <h4 id="titulo-dia">Selecciona un día para ver la agenda</h4>
+                                    <div class="horarios-dia">
+                                        <div class="horario-item">
+                                            <span class="horario">🌅 Mañana</span>
+                                            <div class="actividades" id="actividades-manana">
+                                                <p class="sin-actividades">No hay actividades programadas</p>
+                                            </div>
+                                        </div>
+                                        <div class="horario-item">
+                                            <span class="horario">☀️ Tarde</span>
+                                            <div class="actividades" id="actividades-tarde">
+                                                <p class="sin-actividades">No hay actividades programadas</p>
+                                            </div>
+                                        </div>
+                                        <div class="horario-item">
+                                            <span class="horario">🌙 Noche</span>
+                                            <div class="actividades" id="actividades-noche">
+                                                <p class="sin-actividades">No hay actividades programadas</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="agenda-controls">
+                                    <button class="btn btn-secondary" onclick="limpiarAgenda()">
+                                        <i class="fas fa-trash"></i> Limpiar Agenda
+                                    </button>
+                                    <button class="btn btn-primary" onclick="guardarAgenda()">
+                                        <i class="fas fa-save"></i> Guardar Agenda
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions" style="margin-top: 2rem;">
                                 <button class="btn btn-primary btn-large" onclick="descargarRecurso('agenda-completa')">
                                     <i class="fas fa-download"></i>
                                     Descargar Agenda Semanal (PDF)
@@ -187,6 +236,18 @@
 
     <script src="script.js"></script>
     <script>
+        let agenda = {
+            lunes: { manana: [], tarde: [], noche: [] },
+            martes: { manana: [], tarde: [], noche: [] },
+            miercoles: { manana: [], tarde: [], noche: [] },
+            jueves: { manana: [], tarde: [], noche: [] },
+            viernes: { manana: [], tarde: [], noche: [] },
+            sabado: { manana: [], tarde: [], noche: [] },
+            domingo: { manana: [], tarde: [], noche: [] }
+        };
+        
+        let diaActual = null;
+        
         function descargarRecurso(tipo) {
             let nombreArchivo = 'Agenda_Visual_Semanal_MindTea.pdf';
             let mensaje = 'Agenda Visual Semanal';
@@ -203,6 +264,129 @@
             showNotification(`✅ Descarga iniciada: ${mensaje}`, 'success');
             
             console.log(`Descarga iniciada: ${mensaje}`);
+        }
+        
+        // Funcionalidad interactiva de agenda
+        document.addEventListener('DOMContentLoaded', function() {
+            const botonesDia = document.querySelectorAll('.btn-dia');
+            
+            botonesDia.forEach(boton => {
+                boton.addEventListener('click', function() {
+                    const dia = this.getAttribute('data-dia');
+                    seleccionarDia(dia);
+                });
+            });
+        });
+        
+        function seleccionarDia(dia) {
+            diaActual = dia;
+            const tituloDia = document.getElementById('titulo-dia');
+            const nombresDias = {
+                lunes: 'Lunes',
+                martes: 'Martes',
+                miercoles: 'Miércoles',
+                jueves: 'Jueves',
+                viernes: 'Viernes',
+                sabado: 'Sábado',
+                domingo: 'Domingo'
+            };
+            
+            tituloDia.textContent = `Agenda - ${nombresDias[dia]}`;
+            
+            // Actualizar botones activos
+            document.querySelectorAll('.btn-dia').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.btn-dia[data-dia="${dia}"]`).classList.add('active');
+            
+            // Mostrar actividades del día
+            mostrarActividadesDia(dia);
+        }
+        
+        function mostrarActividadesDia(dia) {
+            const actividades = agenda[dia];
+            
+            // Mostrar actividades de la mañana
+            const contenedorManana = document.getElementById('actividades-manana');
+            mostrarActividadesHorario(contenedorManana, actividades.manana, 'manana');
+            
+            // Mostrar actividades de la tarde
+            const contenedorTarde = document.getElementById('actividades-tarde');
+            mostrarActividadesHorario(contenedorTarde, actividades.tarde, 'tarde');
+            
+            // Mostrar actividades de la noche
+            const contenedorNoche = document.getElementById('actividades-noche');
+            mostrarActividadesHorario(contenedorNoche, actividades.noche, 'noche');
+        }
+        
+        function mostrarActividadesHorario(contenedor, actividades, horario) {
+            if (actividades.length === 0) {
+                contenedor.innerHTML = '<p class="sin-actividades">No hay actividades programadas</p>';
+                return;
+            }
+            
+            let html = '';
+            actividades.forEach((actividad, index) => {
+                html += `
+                    <div class="actividad-item">
+                        <span>${actividad}</span>
+                        <button class="btn-eliminar" onclick="eliminarActividad('${horario}', ${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            // Agregar botón para añadir actividad
+            html += `
+                <div class="agregar-actividad">
+                    <input type="text" id="nueva-actividad-${horario}" placeholder="Nueva actividad...">
+                    <button class="btn-agregar" onclick="agregarActividad('${horario}')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            `;
+            
+            contenedor.innerHTML = html;
+        }
+        
+        function agregarActividad(horario) {
+            if (!diaActual) {
+                showNotification('⚠️ Primero selecciona un día', 'warning');
+                return;
+            }
+            
+            const input = document.getElementById(`nueva-actividad-${horario}`);
+            const actividad = input.value.trim();
+            
+            if (actividad) {
+                agenda[diaActual][horario].push(actividad);
+                mostrarActividadesDia(diaActual);
+                input.value = '';
+                showNotification('✅ Actividad agregada correctamente', 'success');
+            }
+        }
+        
+        function eliminarActividad(horario, index) {
+            agenda[diaActual][horario].splice(index, 1);
+            mostrarActividadesDia(diaActual);
+            showNotification('✅ Actividad eliminada', 'success');
+        }
+        
+        function limpiarAgenda() {
+            if (!diaActual) {
+                showNotification('⚠️ Primero selecciona un día', 'warning');
+                return;
+            }
+            
+            agenda[diaActual] = { manana: [], tarde: [], noche: [] };
+            mostrarActividadesDia(diaActual);
+            showNotification('✅ Agenda limpiada correctamente', 'success');
+        }
+        
+        function guardarAgenda() {
+            showNotification('✅ Agenda guardada correctamente', 'success');
+            console.log('Agenda guardada:', agenda);
         }
     </script>
 </body>
