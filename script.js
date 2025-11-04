@@ -21,20 +21,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth scroll para navegación
+    // Smooth scroll para navegación (solo para anclas en la misma página)
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
             
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80; // Ajuste para header fijo
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+            // Solo aplicar smooth scroll para anclas en la misma página
+            if (targetId.startsWith('#') && window.location.pathname.endsWith('index.html')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80; // Ajuste para header fijo
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
             }
+            // Para enlaces a otras páginas, dejar que el navegador maneje la navegación normalmente
         });
     });
 
