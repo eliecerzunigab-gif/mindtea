@@ -220,11 +220,25 @@
                 if (experiencias.length === 0) {
                     experiencias = obtenerExperienciasEjemplo();
                     // Guardar las experiencias de ejemplo
-                    localStorage.setItem('experiencias_mindtea', JSON.stringify(experiencias));
+                    try {
+                        localStorage.setItem('experiencias_mindtea', JSON.stringify(experiencias));
+                    } catch (e) {
+                        console.log('No se pudo guardar en localStorage:', e);
+                    }
                 }
 
                 // Ordenar por fecha (más recientes primero)
                 experiencias.sort((a, b) => b.id - a.id);
+
+                // Verificar que hay experiencias para mostrar
+                if (experiencias.length === 0) {
+                    listaExperiencias.innerHTML = `
+                        <div class="experiencia-vacia">
+                            <p>No hay experiencias publicadas aún. ¡Sé el primero en compartir tu historia!</p>
+                        </div>
+                    `;
+                    return;
+                }
 
                 listaExperiencias.innerHTML = experiencias.map(exp => `
                     <div class="experiencia-item" data-id="${exp.id}">
@@ -255,7 +269,15 @@
             }
 
             function obtenerExperiencias() {
-                return JSON.parse(localStorage.getItem('experiencias_mindtea')) || [];
+                try {
+                    const experiencias = localStorage.getItem('experiencias_mindtea');
+                    if (experiencias) {
+                        return JSON.parse(experiencias);
+                    }
+                } catch (e) {
+                    console.log('Error al obtener experiencias de localStorage:', e);
+                }
+                return [];
             }
 
             function guardarExperiencia(experiencia) {
