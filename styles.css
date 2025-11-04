@@ -326,15 +326,12 @@ body {
 }
 
 .proposito-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    border-radius: 50%;
+    width: 120px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1.5rem;
-    overflow: hidden;
 }
 
 .proposito-icon i {
@@ -346,7 +343,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 10px;
 }
 
 .proposito-card h3 {
