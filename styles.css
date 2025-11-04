@@ -1687,3 +1687,535 @@ body {
 .fade-in-up {
     animation: fadeInUp 0.6s ease-out;
 }
+
+/* Estilos para funcionalidades interactivas */
+.pictogramas-interactivos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pictogramas-disponibles h4,
+.secuencia-creada h4 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.pictogramas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.pictograma-item {
+    background: var(--white);
+    border: 2px solid var(--primary-light);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.pictograma-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-hover);
+}
+
+.pictograma-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.pictograma-item span {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.secuencia-container {
+    background: var(--background-light);
+    border: 2px dashed var(--primary-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    min-height: 200px;
+    margin-bottom: 1rem;
+}
+
+.secuencia-vacia {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.pictograma-secuencia {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--white);
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 0.5rem;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-color);
+}
+
+.pictograma-secuencia .pictograma-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.btn-eliminar {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-left: auto;
+}
+
+.btn-eliminar:hover {
+    background: #ff5252;
+    transform: scale(1.1);
+}
+
+/* Estilos para agenda interactiva */
+.agenda-interactiva {
+    margin-bottom: 2rem;
+}
+
+.dias-semana {
+    margin-bottom: 2rem;
+}
+
+.dias-semana h4 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.dias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.5rem;
+}
+
+.btn-dia {
+    background: var(--white);
+    border: 2px solid var(--primary-light);
+    border-radius: var(--border-radius);
+    padding: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.btn-dia:hover,
+.btn-dia.active {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.agenda-dia {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+#titulo-dia {
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.horarios-dia {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.horario-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.horario {
+    font-weight: 600;
+    color: var(--text-dark);
+    min-width: 100px;
+    padding: 0.5rem 0;
+}
+
+.actividades {
+    flex: 1;
+    min-height: 60px;
+}
+
+.sin-actividades {
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
+}
+
+.actividad-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--background-light);
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 0.5rem;
+}
+
+.agregar-actividad {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.agregar-actividad input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius);
+}
+
+.btn-agregar {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-agregar:hover {
+    background: var(--primary-dark);
+}
+
+.agenda-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Estilos para termómetro interactivo */
+.termometro-interactivo {
+    margin-bottom: 2rem;
+}
+
+.termometro-visual {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: start;
+}
+
+.termometro-escala {
+    position: relative;
+    width: 60px;
+    height: 300px;
+    background: #f0f0f0;
+    border-radius: 30px;
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.nivel-termometro {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: var(--primary-color);
+    border-radius: 30px;
+    transition: all 0.5s ease;
+}
+
+.marcas-termometro {
+    position: absolute;
+    right: -40px;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.marca {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+}
+
+.info-nivel {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.info-nivel h4 {
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.info-nivel p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.estrategias-nivel {
+    background: var(--background-light);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.estrategias-nivel strong {
+    color: var(--text-dark);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.estrategias-nivel ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.estrategias-nivel li {
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+}
+
+.controles-termometro {
+    margin-bottom: 2rem;
+}
+
+.controles-termometro h4 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.niveles-emocionales {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.8rem;
+}
+
+.btn-nivel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--white);
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.btn-nivel:hover,
+.btn-nivel.active {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-nivel[data-nivel="1"]:hover,
+.btn-nivel[data-nivel="1"].active {
+    border-color: #4CAF50;
+    background: #f1f8e9;
+}
+
+.btn-nivel[data-nivel="2"]:hover,
+.btn-nivel[data-nivel="2"].active {
+    border-color: #FFC107;
+    background: #fffde7;
+}
+
+.btn-nivel[data-nivel="3"]:hover,
+.btn-nivel[data-nivel="3"].active {
+    border-color: #FF9800;
+    background: #fff3e0;
+}
+
+.btn-nivel[data-nivel="4"]:hover,
+.btn-nivel[data-nivel="4"].active {
+    border-color: #F44336;
+    background: #ffebee;
+}
+
+.btn-nivel[data-nivel="5"]:hover,
+.btn-nivel[data-nivel="5"].active {
+    border-color: #E91E63;
+    background: #fce4ec;
+}
+
+.emoji-nivel {
+    font-size: 1.2rem;
+}
+
+.registro-emociones {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.registro-emociones h4 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.form-registro {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-registro input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.historial-emociones {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.sin-registros {
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+}
+
+.registro-item {
+    background: var(--background-light);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 0.8rem;
+    position: relative;
+    transition: var(--transition);
+}
+
+.registro-item:hover {
+    background: #f0f0f0;
+}
+
+.registro-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.nivel-indicador {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.fecha-registro {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.descripcion-emocion {
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Responsive para funcionalidades interactivas */
+@media (max-width: 768px) {
+    .pictogramas-interactivos {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .pictogramas-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    
+    .termometro-visual {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .termometro-escala {
+        width: 40px;
+        height: 200px;
+    }
+    
+    .niveles-emocionales {
+        grid-template-columns: 1fr;
+    }
+    
+    .horario-item {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .horario {
+        min-width: auto;
+    }
+    
+    .agenda-controls {
+        flex-direction: column;
+    }
+    
+    .form-registro {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .pictogramas-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dias-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .termometro-escala {
+        width: 30px;
+        height: 150px;
+    }
+    
+    .marcas-termometro {
+        right: -30px;
+    }
+    
+    .marca {
+        font-size: 0.9rem;
+    }
+    
+    .registro-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+}
