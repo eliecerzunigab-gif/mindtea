@@ -154,25 +154,16 @@ body {
 }
 
 .hero-logo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.2),
-        0 6px 20px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    width: 120px;
+    height: 120px;
     transition: var(--transition);
-    object-fit: cover;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
 }
 
 .hero-logo:hover {
-    transform: scale(1.08);
-    box-shadow: 
-        0 6px 12px rgba(0, 0, 0, 0.25),
-        0 8px 25px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    transform: scale(1.05);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
 }
 
 .hero-title {
@@ -648,8 +639,8 @@ body {
     }
 
     .hero-logo {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
     }
 
     .hero-title {
@@ -701,8 +692,8 @@ body {
     }
 
     .hero-logo {
-        width: 70px;
-        height: 70px;
+        width: 90px;
+        height: 90px;
     }
 
     .hero-title {
