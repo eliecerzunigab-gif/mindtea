@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Sensibilidad Sensorial - MindTea</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="logo.png" alt="MindTea Logo" class="logo-img">
+                    <span class="logo-text">MindTea</span>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html#inicio" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#proposito" class="nav-link">Propósito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#recursos" class="nav-link">Recursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contacto" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Cuestionario -->
+    <section class="cuestionario-detalle">
+        <div class="container">
+            <div class="cuestionario-header">
+                <h1 class="section-title">Evaluación de Sensibilidad Sensorial</h1>
+                <p class="section-subtitle">Cuestionario para identificar patrones de procesamiento sensorial y preferencias</p>
+                
+                <div class="cuestionario-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>20-25 minutos</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-user"></i>
+                        <span>Para terapeutas</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-brain"></i>
+                        <span>Procesamiento sensorial</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cuestionario-content">
+                <div class="cuestionario-imagen">
+                    <img src="https://via.placeholder.com/400x300/E91E63/FFFFFF?text=🎯" alt="Evaluación Sensorial">
+                </div>
+
+                <form id="cuestionario-form" class="cuestionario-form">
+                    <!-- Sección 1: Sensibilidad Auditiva -->
+                    <div class="seccion-cuestionario">
+                        <h3>1. Sensibilidad Auditiva</h3>
+                        
+                        <div class="pregunta">
+                            <p>¿Se molesta con sonidos fuertes o inesperados?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Se tapa los oídos ante ruidos específicos?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Busca ambientes silenciosos?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 2: Sensibilidad Táctil -->
+                    <div class="seccion-cuestionario">
+                        <h3>2. Sensibilidad Táctil</h3>
+                        
+                        <div class="pregunta">
+                            <p>¿Evita ciertas texturas de ropa?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Rechaza abrazos o contacto físico?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Es sensible a etiquetas en la ropa?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 3: Sensibilidad Visual -->
+                    <div class="seccion-cuestionario">
+                        <h3>3. Sensibilidad Visual</h3>
+                        
+                        <div class="pregunta">
+                            <p>¿Se molesta con luces brillantes?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Evita contacto visual directo?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Se distrae fácilmente con estímulos visuales?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información del evaluador -->
+                    <div class="seccion-cuestionario">
+                        <h3>Información del Evaluador</h3>
+                        
+                        <div class="form-group">
+                            <label for="nombre-evaluador">Nombre del evaluador:</label>
+                            <input type="text" id="nombre-evaluador" name="nombre-evaluador" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profesion-evaluador">Profesión:</label>
+                            <select id="profesion-evaluador" name="profesion-evaluador" required>
+                                <option value="">Seleccionar profesión</option>
+                                <option value="terapeuta">Terapeuta Ocupacional</option>
+                                <option value="psicologo">Psicólogo</option>
+                                <option value="fonoaudiologo">Fonoaudiólogo</option>
+                                <option value="educador">Educador</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha-evaluacion">Fecha de evaluación:</label>
+                            <input type="date" id="fecha-evaluacion" name="fecha-evaluacion" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-check-circle"></i>
+                            Enviar Cuestionario
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i>
+                            Reiniciar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="cuestionario-resultado" id="resultado" style="display: none;">
+                <div class="resultado-content">
+                    <h3>Resultado del Cuestionario</h3>
+                    <div class="puntuacion" id="puntuacion"></div>
+                    <div class="recomendaciones" id="recomendaciones"></div>
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="fas fa-print"></i>
+                        Imprimir Resultado
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="MindTea Logo" class="footer-logo-img">
+                    <span class="footer-logo-text">MindTea</span>
+                </div>
+                <p class="footer-motto">Conectando Familias con Profesionales</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MindTea. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('cuestionario-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Calcular puntuación
+            let puntuacion = 0;
+            const respuestas = document.querySelectorAll('input[type="radio"]:checked');
+            
+            respuestas.forEach(respuesta => {
+                switch(respuesta.value) {
+                    case 'siempre': puntuacion += 3; break;
+                    case 'frecuente': puntuacion += 2; break;
+                    case 'ocasional': puntuacion += 1; break;
+                    case 'nunca': puntuacion += 0; break;
+                }
+            });
+
+            // Mostrar resultado
+            const resultadoDiv = document.getElementById('resultado');
+            const puntuacionDiv = document.getElementById('puntuacion');
+            const recomendacionesDiv = document.getElementById('recomendaciones');
+
+            let mensaje = '';
+            let recomendaciones = '';
+
+            if (puntuacion >= 20) {
+                mensaje = '<div class="resultado-bueno">Sensibilidad sensorial moderada</div>';
+                recomendaciones = '<p>Se observan patrones de sensibilidad sensorial dentro de parámetros esperados. Continúe con estrategias de regulación.</p>';
+            } else if (puntuacion >= 12) {
+                mensaje = '<div class="resultado-medio">Sensibilidad sensorial elevada</div>';
+                recomendaciones = '<p>Se observa sensibilidad sensorial elevada en algunas áreas. Recomendamos estrategias específicas de regulación sensorial.</p>';
+            } else {
+                mensaje = '<div class="resultado-alerta">Sensibilidad sensorial significativa</div>';
+                recomendaciones = '<p>Se observa sensibilidad sensorial significativa. Recomendamos intervención especializada en integración sensorial.</p>';
+            }
+
+            puntuacionDiv.innerHTML = `<h4>Puntuación: ${puntuacion}/27</h4>${mensaje}`;
+            recomendacionesDiv.innerHTML = `<h4>Recomendaciones:</h4>${recomendaciones}`;
+            
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

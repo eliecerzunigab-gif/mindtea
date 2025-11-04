@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento Mensual de Progreso - MindTea</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="logo.png" alt="MindTea Logo" class="logo-img">
+                    <span class="logo-text">MindTea</span>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html#inicio" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#proposito" class="nav-link">Propósito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#recursos" class="nav-link">Recursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contacto" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Cuestionario -->
+    <section class="cuestionario-detalle">
+        <div class="container">
+            <div class="cuestionario-header">
+                <h1 class="section-title">Seguimiento Mensual de Progreso</h1>
+                <p class="section-subtitle">Registro sistemático para monitorear avances en áreas específicas del desarrollo</p>
+                
+                <div class="cuestionario-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>5-10 minutos</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-user"></i>
+                        <span>Para familias</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Mensual</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cuestionario-content">
+                <div class="cuestionario-imagen">
+                    <img src="https://via.placeholder.com/400x300/FF9800/FFFFFF?text=📝" alt="Seguimiento Mensual de Progreso">
+                </div>
+
+                <form id="cuestionario-form" class="cuestionario-form">
+                    <!-- Sección 1: Comunicación -->
+                    <div class="seccion-cuestionario">
+                        <h3>1. Comunicación y Lenguaje</h3>
+                        
+                        <div class="pregunta">
+                            <p>¿Ha mejorado en el uso de palabras nuevas?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="mucho">
+                                    <span>Mucho</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="algo">
+                                    <span>Algo</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="poco">
+                                    <span>Poco</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="nada">
+                                    <span>Nada</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Se comunica mejor con gestos o palabras?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="mucho">
+                                    <span>Mucho</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="algo">
+                                    <span>Algo</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="poco">
+                                    <span>Poco</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="nada">
+                                    <span>Nada</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Entiende mejor las instrucciones?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="mucho">
+                                    <span>Mucho</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="algo">
+                                    <span>Algo</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="poco">
+                                    <span>Poco</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="nada">
+                                    <span>Nada</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 2: Socialización -->
+                    <div class="seccion-cuestionario">
+                        <h3>2. Socialización e Interacción</h3>
+                        
+                        <div class="pregunta">
+                            <p>¿Ha mejorado en el contacto visual?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="mucho">
+                                    <span>Mucho</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="algo">
+                                    <span>Algo</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="poco">
+                                    <span>Poco</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="nada">
+                                    <span>Nada</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Interactúa más con otros niños?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="mucho">
+                                    <span>Mucho</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="algo">
+                                    <span>Algo</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="poco">
+                                    <span>Poco</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="nada">
+                                    <span>Nada</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Comparte más juguetes o juegos?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="mucho">
+                                    <span>Mucho</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="algo">
+                                    <span>Algo</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="poco">
+                                    <span>Poco</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="nada">
+                                    <span>Nada</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 3: Comportamiento -->
+                    <div class="seccion-cuestionario">
+                        <h3>3. Comportamiento y Rutinas</h3>
+                        
+                        <div class="pregunta">
+                            <p>¿Ha disminuido la ansiedad ante cambios?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="mucho">
+                                    <span>Mucho</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="algo">
+                                    <span>Algo</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="poco">
+                                    <span>Poco</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="nada">
+                                    <span>Nada</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Ha mejorado en seguir rutinas?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="mucho">
+                                    <span>Mucho</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="algo">
+                                    <span>Algo</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="poco">
+                                    <span>Poco</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="nada">
+                                    <span>Nada</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Ha disminuido conductas repetitivas?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="mucho">
+                                    <span>Mucho</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="algo">
+                                    <span>Algo</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="poco">
+                                    <span>Poco</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="nada">
+                                    <span>Nada</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información del seguimiento -->
+                    <div class="seccion-cuestionario">
+                        <h3>Información del Seguimiento</h3>
+                        
+                        <div class="form-group">
+                            <label for="nombre-nino">Nombre del niño/a:</label>
+                            <input type="text" id="nombre-nino" name="nombre-nino" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="periodo-seguimiento">Período de seguimiento:</label>
+                            <select id="periodo-seguimiento" name="periodo-seguimiento" required>
+                                <option value="">Seleccionar período</option>
+                                <option value="mes1">Mes 1</option>
+                                <option value="mes2">Mes 2</option>
+                                <option value="mes3">Mes 3</option>
+                                <option value="mes4">Mes 4</option>
+                                <option value="mes5">Mes 5</option>
+                                <option value="mes6">Mes 6</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha-seguimiento">Fecha del seguimiento:</label>
+                            <input type="date" id="fecha-seguimiento" name="fecha-seguimiento" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-check-circle"></i>
+                            Enviar Cuestionario
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i>
+                            Reiniciar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="cuestionario-resultado" id="resultado" style="display: none;">
+                <div class="resultado-content">
+                    <h3>Resultado del Cuestionario</h3>
+                    <div class="puntuacion" id="puntuacion"></div>
+                    <div class="recomendaciones" id="recomendaciones"></div>
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="fas fa-print"></i>
+                        Imprimir Resultado
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="MindTea Logo" class="footer-logo-img">
+                    <span class="footer-logo-text">MindTea</span>
+                </div>
+                <p class="footer-motto">Conectando Familias con Profesionales</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MindTea. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('cuestionario-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Calcular puntuación
+            let puntuacion = 0;
+            const respuestas = document.querySelectorAll('input[type="radio"]:checked');
+            
+            respuestas.forEach(respuesta => {
+                switch(respuesta.value) {
+                    case 'mucho': puntuacion += 3; break;
+                    case 'algo': puntuacion += 2; break;
+                    case 'poco': puntuacion += 1; break;
+                    case 'nada': puntuacion += 0; break;
+                }
+            });
+
+            // Mostrar resultado
+            const resultadoDiv = document.getElementById('resultado');
+            const puntuacionDiv = document.getElementById('puntuacion');
+            const recomendacionesDiv = document.getElementById('recomendaciones');
+
+            let mensaje = '';
+            let recomendaciones = '';
+
+            if (puntuacion >= 20) {
+                mensaje = '<div class="resultado-bueno">Progreso significativo</div>';
+                recomendaciones = '<p>Se observa un progreso muy positivo en todas las áreas evaluadas. Continúe con las estrategias actuales.</p>';
+            } else if (puntuacion >= 12) {
+                mensaje = '<div class="resultado-medio">Progreso moderado</div>';
+                recomendaciones = '<p>Se observa progreso en algunas áreas. Recomendamos reforzar las estrategias en áreas con menor avance.</p>';
+            } else {
+                mensaje = '<div class="resultado-alerta">Progreso limitado</div>';
+                recomendaciones = '<p>El progreso es limitado. Recomendamos consultar con especialista para ajustar estrategias de intervención.</p>';
+            }
+
+            puntuacionDiv.innerHTML = `<h4>Puntuación: ${puntuacion}/27</h4>${mensaje}`;
+            recomendacionesDiv.innerHTML = `<h4>Recomendaciones:</h4>${recomendaciones}`;
+            
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
