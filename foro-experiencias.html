@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro Experiencias Usuarios - MindTea</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="logo.png" alt="MindTea Logo" class="logo-img">
+                    <span class="logo-text">MindTea</span>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#proposito" class="nav-link">Propósito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#recursos" class="nav-link">Recursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contacto" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Foro -->
+    <section class="recursos-detalle">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html#recursos" class="breadcrumb-link">
+                    <i class="fas fa-arrow-left"></i> Volver a Recursos
+                </a>
+            </div>
+            
+            <div class="foro-header">
+                <div class="foro-icon">
+                    <span class="emoji-icon">💬</span>
+                </div>
+                <h1 class="section-title">Foro de Experiencias Usuarios</h1>
+                <p class="foro-description">Comparte y lee experiencias reales de familias y profesionales sobre el TEA</p>
+            </div>
+
+            <!-- Botón para publicar nueva experiencia -->
+            <div class="publicar-experiencia">
+                <button id="btn-publicar" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Publicar Nueva Experiencia
+                </button>
+            </div>
+
+            <!-- Listado de experiencias -->
+            <div class="experiencias-container">
+                <h2 class="experiencias-title">Experiencias Recientes</h2>
+                <div id="lista-experiencias" class="lista-experiencias">
+                    <!-- Las experiencias se cargarán dinámicamente aquí -->
+                    <div class="experiencia-vacia">
+                        <p>No hay experiencias publicadas aún. ¡Sé el primero en compartir tu historia!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para publicar experiencia -->
+    <div id="modal-experiencia" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Compartir Experiencia</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="form-experiencia" class="form-experiencia">
+                <div class="form-group">
+                    <label for="titulo">Título de la experiencia</label>
+                    <input type="text" id="titulo" name="titulo" placeholder="Ej: Mi experiencia con la terapia ocupacional" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="diagnostico">Diagnóstico</option>
+                        <option value="terapias">Terapias</option>
+                        <option value="educacion">Educación</option>
+                        <option value="vida-cotidiana">Vida Cotidiana</option>
+                        <option value="derechos">Derechos y Leyes</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="experiencia">Tu experiencia</label>
+                    <textarea id="experiencia" name="experiencia" placeholder="Comparte tu historia, consejos, aprendizajes..." rows="8" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Tu nombre (opcional)</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Puede ser anónimo">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="btn-cancelar">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Publicar Experiencia</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="MindTea Logo" class="footer-logo-img">
+                    <span class="footer-logo-text">MindTea</span>
+                </div>
+                <p class="footer-motto">Conectando Familias con Profesionales</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:contacto@mindtea.cl" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MindTea. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Funcionalidad del foro
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('modal-experiencia');
+            const btnPublicar = document.getElementById('btn-publicar');
+            const btnCancelar = document.getElementById('btn-cancelar');
+            const closeBtn = document.querySelector('.close');
+            const formExperiencia = document.getElementById('form-experiencia');
+            const listaExperiencias = document.getElementById('lista-experiencias');
+
+            // Cargar experiencias existentes
+            cargarExperiencias();
+
+            // Abrir modal
+            btnPublicar.addEventListener('click', function() {
+                modal.style.display = 'block';
+            });
+
+            // Cerrar modal
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            btnCancelar.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Cerrar modal al hacer clic fuera
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Enviar formulario
+            formExperiencia.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const titulo = document.getElementById('titulo').value;
+                const categoria = document.getElementById('categoria').value;
+                const experiencia = document.getElementById('experiencia').value;
+                const nombre = document.getElementById('nombre').value || 'Anónimo';
+
+                // Crear nueva experiencia
+                const nuevaExperiencia = {
+                    id: Date.now(),
+                    titulo: titulo,
+                    categoria: categoria,
+                    experiencia: experiencia,
+                    nombre: nombre,
+                    fecha: new Date().toLocaleDateString('es-CL'),
+                    likes: 0
+                };
+
+                // Guardar en localStorage
+                guardarExperiencia(nuevaExperiencia);
+
+                // Actualizar lista
+                cargarExperiencias();
+
+                // Limpiar formulario y cerrar modal
+                formExperiencia.reset();
+                modal.style.display = 'none';
+
+                // Mostrar mensaje de éxito
+                alert('¡Tu experiencia ha sido publicada exitosamente!');
+            });
+
+            function cargarExperiencias() {
+                const experiencias = obtenerExperiencias();
+                
+                if (experiencias.length === 0) {
+                    listaExperiencias.innerHTML = `
+                        <div class="experiencia-vacia">
+                            <p>No hay experiencias publicadas aún. ¡Sé el primero en compartir tu historia!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Ordenar por fecha (más recientes primero)
+                experiencias.sort((a, b) => b.id - a.id);
+
+                listaExperiencias.innerHTML = experiencias.map(exp => `
+                    <div class="experiencia-item" data-id="${exp.id}">
+                        <div class="experiencia-header">
+                            <h3 class="experiencia-titulo">${exp.titulo}</h3>
+                            <span class="experiencia-fecha">${exp.fecha}</span>
+                        </div>
+                        <div class="experiencia-categoria">
+                            <span class="categoria-badge">${obtenerNombreCategoria(exp.categoria)}</span>
+                        </div>
+                        <div class="experiencia-contenido">
+                            <p>${exp.experiencia}</p>
+                        </div>
+                        <div class="experiencia-footer">
+                            <div class="experiencia-autor">
+                                <i class="fas fa-user"></i>
+                                <span>${exp.nombre}</span>
+                            </div>
+                            <div class="experiencia-acciones">
+                                <button class="btn-like" onclick="darLike(${exp.id})">
+                                    <i class="fas fa-heart"></i>
+                                    <span>${exp.likes}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            function obtenerExperiencias() {
+                return JSON.parse(localStorage.getItem('experiencias_mindtea')) || [];
+            }
+
+            function guardarExperiencia(experiencia) {
+                const experiencias = obtenerExperiencias();
+                experiencias.push(experiencia);
+                localStorage.setItem('experiencias_mindtea', JSON.stringify(experiencias));
+            }
+
+            function obtenerNombreCategoria(categoria) {
+                const categorias = {
+                    'diagnostico': 'Diagnóstico',
+                    'terapias': 'Terapias',
+                    'educacion': 'Educación',
+                    'vida-cotidiana': 'Vida Cotidiana',
+                    'derechos': 'Derechos y Leyes',
+                    'otro': 'Otro'
+                };
+                return categorias[categoria] || 'General';
+            }
+        });
+
+        // Función global para dar like
+        function darLike(id) {
+            const experiencias = JSON.parse(localStorage.getItem('experiencias_mindtea')) || [];
+            const experiencia = experiencias.find(exp => exp.id === id);
+            
+            if (experiencia) {
+                experiencia.likes = (experiencia.likes || 0) + 1;
+                localStorage.setItem('experiencias_mindtea', JSON.stringify(experiencias));
+                
+                // Actualizar el contador en la interfaz
+                const likeBtn = document.querySelector(`.experiencia-item[data-id="${id}"] .btn-like span`);
+                if (likeBtn) {
+                    likeBtn.textContent = experiencia.likes;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
