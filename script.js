@@ -288,6 +288,93 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('MindTea Web App inicializada correctamente');
 });
 
+// Funciones específicas para descargas
+function descargarRecurso(tipo) {
+    let nombreArchivo = '';
+    let mensaje = '';
+    
+    switch(tipo) {
+        case 'pictogramas':
+            nombreArchivo = 'Set_Pictogramas_Rutinas_MindTea.pdf';
+            mensaje = 'Set de Pictogramas de Rutinas';
+            break;
+        case 'agenda':
+            nombreArchivo = 'Agenda_Visual_Semanal_MindTea.pdf';
+            mensaje = 'Agenda Visual Semanal';
+            break;
+        case 'emociones':
+            nombreArchivo = 'Termometro_Emociones_MindTea.pdf';
+            mensaje = 'Termómetro de Emociones';
+            break;
+        default:
+            nombreArchivo = 'Recurso_MindTea.pdf';
+            mensaje = 'Recurso de MindTea';
+    }
+    
+    // Simular descarga (en un entorno real, esto sería un enlace a un archivo real)
+    const enlace = document.createElement('a');
+    enlace.href = '#'; // En un entorno real, sería la URL del archivo
+    enlace.download = nombreArchivo;
+    document.body.appendChild(enlace);
+    enlace.click();
+    document.body.removeChild(enlace);
+    
+    // Mostrar notificación de éxito
+    showNotification(`✅ Descarga iniciada: ${mensaje}`, 'success');
+    
+    // En un entorno real, aquí se podría agregar tracking de descargas
+    console.log(`Descarga iniciada: ${mensaje}`);
+}
+
+// Función para mostrar notificaciones (si no está definida en el scope principal)
+function showNotification(message, type) {
+    // Crear elemento de notificación
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    // Estilos de la notificación
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
+        max-width: 300px;
+    `;
+    
+    // Colores según el tipo
+    if (type === 'success') {
+        notification.style.background = 'var(--primary-color)';
+    } else if (type === 'error') {
+        notification.style.background = '#f44336';
+    } else {
+        notification.style.background = 'var(--accent-color)';
+    }
+    
+    document.body.appendChild(notification);
+    
+    // Animación de entrada
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remover después de 5 segundos
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 5000);
+}
+
 // Funciones utilitarias adicionales
 const MindTeaUtils = {
     // Formatear números
