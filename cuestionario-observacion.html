@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala de Observación Social - MindTea</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="logo.png" alt="MindTea Logo" class="logo-img">
+                    <span class="logo-text">MindTea</span>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html#inicio" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#proposito" class="nav-link">Propósito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#recursos" class="nav-link">Recursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contacto" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Cuestionario -->
+    <section class="cuestionario-detalle">
+        <div class="container">
+            <div class="cuestionario-header">
+                <h1 class="section-title">Escala de Observación Social</h1>
+                <p class="section-subtitle">Herramienta para evaluar habilidades sociales y de comunicación en diferentes contextos</p>
+                
+                <div class="cuestionario-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>10-15 minutos</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-user"></i>
+                        <span>Para educadores</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-users"></i>
+                        <span>Contexto grupal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cuestionario-content">
+                <div class="cuestionario-imagen">
+                    <img src="https://via.placeholder.com/400x300/26A69A/FFFFFF?text=🔍" alt="Escala de Observación Social">
+                </div>
+
+                <form id="cuestionario-form" class="cuestionario-form">
+                    <!-- Sección 1: Interacción con Pares -->
+                    <div class="seccion-cuestionario">
+                        <h3>1. Interacción con Pares</h3>
+                        
+                        <div class="pregunta">
+                            <p>¿Inicia interacciones con otros niños?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta1" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Participa en juegos grupales?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta2" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Comparte juguetes o materiales?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta3" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 2: Comunicación -->
+                    <div class="seccion-cuestionario">
+                        <h3>2. Comunicación y Expresión</h3>
+                        
+                        <div class="pregunta">
+                            <p>¿Usa gestos para comunicarse?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta4" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Responde a preguntas directas?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta5" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Expresa emociones apropiadamente?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta6" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 3: Comportamiento -->
+                    <div class="seccion-cuestionario">
+                        <h3>3. Comportamiento en Grupo</h3>
+                        
+                        <div class="pregunta">
+                            <p>¿Sigue instrucciones grupales?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta7" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Muestra empatía hacia otros?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta8" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pregunta">
+                            <p>¿Resuelve conflictos adecuadamente?</p>
+                            <div class="opciones">
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="siempre">
+                                    <span>Siempre</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="frecuente">
+                                    <span>Frecuentemente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="ocasional">
+                                    <span>Ocasionalmente</span>
+                                </label>
+                                <label class="opcion">
+                                    <input type="radio" name="pregunta9" value="nunca">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información del observador -->
+                    <div class="seccion-cuestionario">
+                        <h3>Información del Observador</h3>
+                        
+                        <div class="form-group">
+                            <label for="nombre-observador">Nombre del observador:</label>
+                            <input type="text" id="nombre-observador" name="nombre-observador" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contexto-observacion">Contexto de observación:</label>
+                            <select id="contexto-observacion" name="contexto-observacion" required>
+                                <option value="">Seleccionar contexto</option>
+                                <option value="aula">Aula de clases</option>
+                                <option value="recreo">Recreo</option>
+                                <option value="actividad">Actividad grupal</option>
+                                <option value="juego">Juego libre</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha-observacion">Fecha de observación:</label>
+                            <input type="date" id="fecha-observacion" name="fecha-observacion" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-check-circle"></i>
+                            Enviar Cuestionario
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i>
+                            Reiniciar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="cuestionario-resultado" id="resultado" style="display: none;">
+                <div class="resultado-content">
+                    <h3>Resultado del Cuestionario</h3>
+                    <div class="puntuacion" id="puntuacion"></div>
+                    <div class="recomendaciones" id="recomendaciones"></div>
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="fas fa-print"></i>
+                        Imprimir Resultado
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="MindTea Logo" class="footer-logo-img">
+                    <span class="footer-logo-text">MindTea</span>
+                </div>
+                <p class="footer-motto">Conectando Familias con Profesionales</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MindTea. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('cuestionario-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Calcular puntuación
+            let puntuacion = 0;
+            const respuestas = document.querySelectorAll('input[type="radio"]:checked');
+            
+            respuestas.forEach(respuesta => {
+                switch(respuesta.value) {
+                    case 'siempre': puntuacion += 3; break;
+                    case 'frecuente': puntuacion += 2; break;
+                    case 'ocasional': puntuacion += 1; break;
+                    case 'nunca': puntuacion += 0; break;
+                }
+            });
+
+            // Mostrar resultado
+            const resultadoDiv = document.getElementById('resultado');
+            const puntuacionDiv = document.getElementById('puntuacion');
+            const recomendacionesDiv = document.getElementById('recomendaciones');
+
+            let mensaje = '';
+            let recomendaciones = '';
+
+            if (puntuacion >= 20) {
+                mensaje = '<div class="resultado-bueno">Habilidades sociales desarrolladas</div>';
+                recomendaciones = '<p>El niño/a muestra habilidades sociales apropiadas para su edad. Continúe fomentando la interacción positiva.</p>';
+            } else if (puntuacion >= 12) {
+                mensaje = '<div class="resultado-medio">Algunas áreas requieren apoyo</div>';
+                recomendaciones = '<p>Se observan algunas dificultades en habilidades sociales. Recomendamos actividades de socialización guiada.</p>';
+            } else {
+                mensaje = '<div class="resultado-alerta">Apoyo especializado recomendado</div>';
+                recomendaciones = '<p>Se observan dificultades significativas en habilidades sociales. Recomendamos evaluación por especialista.</p>';
+            }
+
+            puntuacionDiv.innerHTML = `<h4>Puntuación: ${puntuacion}/27</h4>${mensaje}`;
+            recomendacionesDiv.innerHTML = `<h4>Recomendaciones:</h4>${recomendaciones}`;
+            
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
