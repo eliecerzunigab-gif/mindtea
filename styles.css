@@ -887,6 +887,19 @@ body {
     .contacto-form {
         padding: 1.5rem;
     }
+
+    .proposito-icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .proposito-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .proposito-card p {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 768px) {
