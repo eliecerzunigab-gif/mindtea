@@ -1161,6 +1161,87 @@ body {
     border-color: var(--primary-color);
 }
 
+/* Estilos para herramientas de detección */
+.herramientas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.herramienta-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.herramienta-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.herramienta-imagen {
+    height: 200px;
+    overflow: hidden;
+}
+
+.herramienta-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.herramienta-content {
+    padding: 1.5rem;
+}
+
+.herramienta-content h3 {
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.herramienta-content p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.herramienta-info {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.herramienta-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.herramienta-detail i {
+    color: var(--primary-color);
+    width: 16px;
+}
+
+.herramienta-accion {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.herramienta-accion:hover {
+    gap: 1rem;
+}
+
 /* Estilos para enlaces */
 .enlaces-lista {
     max-width: 800px;
