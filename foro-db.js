@@ -2,12 +2,124 @@
 const DB_CONFIG = {
     url: 'https://tranquil-lake-75636.herokuapp.com/api',
     // En producción, esta URL debería apuntar a tu API real en Heroku
+    pollingInterval: 30000, // 30 segundos para actualizaciones automáticas
+    maxRetries: 3
 };
 
 // Funciones para interactuar con la base de datos
 class ForoDB {
     constructor() {
         this.baseUrl = DB_CONFIG.url;
+        this.isOnline = false;
+        this.lastSync = null;
+        this.pollingInterval = null;
+        this.checkConnection();
+    }
+
+    // Verificar conexión con la API
+    async checkConnection() {
+        try {
+            const response = await fetch(`${this.baseUrl}/health`, {
+                method: 'GET',
+                timeout: 5000
+            });
+            this.isOnline = response.ok;
+            console.log('Estado de conexión:', this.isOnline ? 'Online' : 'Offline');
+        } catch (error) {
+            this.isOnline = false;
+            console.log('API no disponible, usando localStorage');
+        }
+    }
+
+    // Iniciar sincronización automática
+    startAutoSync() {
+        if (this.pollingInterval) {
+            clearInterval(this.pollingInterval);
+        }
+        
+        this.pollingInterval = setInterval(async () => {
+            await this.syncLocalToServer();
+        }, DB_CONFIG.pollingInterval);
+    }
+
+    // Detener sincronización automática
+    stopAutoSync() {
+        if (this.pollingInterval) {
+            clearInterval(this.pollingInterval);
+            this.pollingInterval = null;
+        }
+    }
+
+    // Sincronizar localStorage con el servidor
+    async syncLocalToServer() {
+        if (!this.isOnline) {
+            await this.checkConnection();
+            if (!this.isOnline) return;
+        }
+
+        try {
+            const publicacionesLocales = this.obtenerPublicacionesLocal();
+            const publicacionesServidor = await this.obtenerPublicaciones();
+            
+            // Encontrar publicaciones locales que no están en el servidor
+            const publicacionesParaSincronizar = publicacionesLocales.filter(local => 
+                !publicacionesServidor.some(server => server.id === local.id)
+            );
+
+            // Sincronizar cada publicación local con el servidor
+            for (const publicacion of publicacionesParaSincronizar) {
+                await this.crearPublicacion(publicacion);
+            }
+
+            // Actualizar localStorage con datos del servidor
+            const publicacionesActualizadas = await this.obtenerPublicaciones();
+            localStorage.setItem('foro_publicaciones', JSON.stringify(publicacionesActualizadas));
+            
+            this.lastSync = new Date();
+            console.log('Sincronización completada:', publicacionesParaSincronizar.length, 'publicaciones sincronizadas');
+            
+        } catch (error) {
+            console.error('Error en sincronización:', error);
+        }
+    }
+
+    // Obtener publicaciones con sincronización automática
+    async obtenerPublicacionesConSync() {
+        if (this.isOnline) {
+            try {
+                const publicaciones = await this.obtenerPublicaciones();
+                // Actualizar localStorage con datos del servidor
+                localStorage.setItem('foro_publicaciones', JSON.stringify(publicaciones));
+                return publicaciones;
+            } catch (error) {
+                console.error('Error al obtener publicaciones del servidor:', error);
+                return this.obtenerPublicacionesLocal();
+            }
+        } else {
+            return this.obtenerPublicacionesLocal();
+        }
+    }
+
+    // Crear publicación con sincronización automática
+    async crearPublicacionConSync(publicacion) {
+        let resultado;
+        
+        if (this.isOnline) {
+            try {
+                resultado = await this.crearPublicacion(publicacion);
+                // Actualizar localStorage con la nueva publicación
+                const publicaciones = this.obtenerPublicacionesLocal();
+                publicaciones.push(resultado);
+                localStorage.setItem('foro_publicaciones', JSON.stringify(publicaciones));
+            } catch (error) {
+                console.error('Error al crear publicación en servidor:', error);
+                resultado = this.crearPublicacionLocal(publicacion);
+            }
+        } else {
+            resultado = this.crearPublicacionLocal(publicacion);
+        }
+
+        return resultado;
     }
 
     // Obtener todas las publicaciones
