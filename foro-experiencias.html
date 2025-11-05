@@ -148,9 +148,10 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="foro-db.js"></script>
     <script>
-        // Funcionalidad del foro
-        document.addEventListener('DOMContentLoaded', function() {
+        // Funcionalidad del foro con base de datos
+        document.addEventListener('DOMContentLoaded', async function() {
             const modal = document.getElementById('modal-experiencia');
             const btnPublicar = document.getElementById('btn-publicar');
             const btnCancelar = document.getElementById('btn-cancelar');
@@ -158,8 +159,8 @@
             const formExperiencia = document.getElementById('form-experiencia');
             const listaExperiencias = document.getElementById('lista-experiencias');
 
-            // Cargar experiencias existentes
-            cargarExperiencias();
+            // Cargar experiencias existentes desde la base de datos
+            await cargarExperiencias();
 
             // Abrir modal
             btnPublicar.addEventListener('click', function() {
@@ -183,7 +184,7 @@
             });
 
             // Enviar formulario
-            formExperiencia.addEventListener('submit', function(e) {
+            formExperiencia.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 const titulo = document.getElementById('titulo').value;
@@ -191,189 +192,101 @@
                 const experiencia = document.getElementById('experiencia').value;
                 const nombre = document.getElementById('nombre').value || 'Anónimo';
 
-                // Crear nueva experiencia
-                const nuevaExperiencia = {
-                    id: Date.now(),
+                // Extraer hashtags del texto
+                const hashtags = extraerHashtags(experiencia);
+
+                // Crear nueva publicación
+                const nuevaPublicacion = {
                     titulo: titulo,
                     categoria: categoria,
-                    experiencia: experiencia,
-                    nombre: nombre,
-                    fecha: new Date().toLocaleDateString('es-CL'),
-                    likes: 0
+                    contenido: experiencia,
+                    autor: nombre,
+                    hashtags: hashtags
                 };
 
-                // Guardar en localStorage
-                guardarExperiencia(nuevaExperiencia);
+                try {
+                    // Guardar en la base de datos
+                    const resultado = await foroDB.crearPublicacion(nuevaPublicacion);
+                    
+                    if (resultado) {
+                        // Actualizar lista
+                        await cargarExperiencias();
 
-                // Actualizar lista
-                cargarExperiencias();
+                        // Limpiar formulario y cerrar modal
+                        formExperiencia.reset();
+                        modal.style.display = 'none';
 
-                // Limpiar formulario y cerrar modal
-                formExperiencia.reset();
-                modal.style.display = 'none';
-
-                // Mostrar mensaje de éxito
-                alert('¡Tu experiencia ha sido publicada exitosamente!');
+                        // Mostrar mensaje de éxito
+                        alert('¡Tu experiencia ha sido publicada exitosamente!');
+                    } else {
+                        alert('Error al publicar la experiencia. Inténtalo de nuevo.');
+                    }
+                } catch (error) {
+                    console.error('Error al publicar:', error);
+                    alert('Error al publicar la experiencia. Inténtalo de nuevo.');
+                }
             });
 
-            function cargarExperiencias() {
-                let experiencias = obtenerExperiencias();
-                
-                // Si no hay experiencias, cargar algunas de ejemplo
-                if (experiencias.length === 0) {
-                    experiencias = obtenerExperienciasEjemplo();
-                    // Guardar las experiencias de ejemplo
-                    try {
-                        localStorage.setItem('experiencias_mindtea', JSON.stringify(experiencias));
-                    } catch (e) {
-                        console.log('No se pudo guardar en localStorage:', e);
+            async function cargarExperiencias() {
+                try {
+                    const publicaciones = await foroDB.obtenerPublicaciones();
+                    
+                    // Verificar que hay publicaciones para mostrar
+                    if (publicaciones.length === 0) {
+                        listaExperiencias.innerHTML = `
+                            <div class="experiencia-vacia">
+                                <p>No hay experiencias publicadas aún. ¡Sé el primero en compartir tu historia!</p>
+                            </div>
+                        `;
+                        return;
                     }
-                }
 
-                // Ordenar por fecha (más recientes primero)
-                experiencias.sort((a, b) => b.id - a.id);
+                    // Ordenar por fecha (más recientes primero)
+                    publicaciones.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
-                // Verificar que hay experiencias para mostrar
-                if (experiencias.length === 0) {
+                    listaExperiencias.innerHTML = publicaciones.map(publicacion => `
+                        <div class="experiencia-item" data-id="${publicacion.id}">
+                            <div class="experiencia-header">
+                                <h3 class="experiencia-titulo">${publicacion.titulo}</h3>
+                                <span class="experiencia-fecha">${formatearFecha(publicacion.fecha)}</span>
+                            </div>
+                            <div class="experiencia-categoria">
+                                <span class="categoria-badge">${obtenerNombreCategoria(publicacion.categoria)}</span>
+                            </div>
+                            <div class="experiencia-contenido">
+                                <p>${publicacion.contenido}</p>
+                            </div>
+                            ${publicacion.hashtags && publicacion.hashtags.length > 0 ? `
+                            <div class="hashtags-container">
+                                ${publicacion.hashtags.map(tag => `
+                                    <span class="hashtag">${tag}</span>
+                                `).join('')}
+                            </div>
+                            ` : ''}
+                            <div class="experiencia-footer">
+                                <div class="experiencia-autor">
+                                    <i class="fas fa-user"></i>
+                                    <span>${publicacion.autor}</span>
+                                </div>
+                                <div class="experiencia-acciones">
+                                    <button class="btn-like" onclick="darLike(${publicacion.id})">
+                                        <i class="fas fa-heart"></i>
+                                        <span>${publicacion.likes || 0}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                } catch (error) {
+                    console.error('Error al cargar experiencias:', error);
                     listaExperiencias.innerHTML = `
                         <div class="experiencia-vacia">
-                            <p>No hay experiencias publicadas aún. ¡Sé el primero en compartir tu historia!</p>
+                            <p>Error al cargar las experiencias. Inténtalo de nuevo más tarde.</p>
                         </div>
                     `;
-                    return;
                 }
-
-                listaExperiencias.innerHTML = experiencias.map(exp => `
-                    <div class="experiencia-item" data-id="${exp.id}">
-                        <div class="experiencia-header">
-                            <h3 class="experiencia-titulo">${exp.titulo}</h3>
-                            <span class="experiencia-fecha">${exp.fecha}</span>
-                        </div>
-                        <div class="experiencia-categoria">
-                            <span class="categoria-badge">${obtenerNombreCategoria(exp.categoria)}</span>
-                        </div>
-                        <div class="experiencia-contenido">
-                            <p>${exp.experiencia}</p>
-                        </div>
-                        <div class="experiencia-footer">
-                            <div class="experiencia-autor">
-                                <i class="fas fa-user"></i>
-                                <span>${exp.nombre}</span>
-                            </div>
-                            <div class="experiencia-acciones">
-                                <button class="btn-like" onclick="darLike(${exp.id})">
-                                    <i class="fas fa-heart"></i>
-                                    <span>${exp.likes}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            function obtenerExperiencias() {
-                try {
-                    const experiencias = localStorage.getItem('experiencias_mindtea');
-                    if (experiencias) {
-                        return JSON.parse(experiencias);
-                    }
-                } catch (e) {
-                    console.log('Error al obtener experiencias de localStorage:', e);
-                }
-                return [];
-            }
-
-            function guardarExperiencia(experiencia) {
-                const experiencias = obtenerExperiencias();
-                experiencias.push(experiencia);
-                localStorage.setItem('experiencias_mindtea', JSON.stringify(experiencias));
-            }
-
-            function obtenerExperienciasEjemplo() {
-                const fechaActual = new Date();
-                const fechaAyer = new Date(fechaActual);
-                fechaAyer.setDate(fechaAyer.getDate() - 1);
-                const fechaAnteayer = new Date(fechaActual);
-                fechaAnteayer.setDate(fechaAnteayer.getDate() - 2);
-
-                return [
-                    {
-                        id: fechaActual.getTime(),
-                        titulo: "Mi experiencia con la terapia ocupacional",
-                        categoria: "terapias",
-                        experiencia: "Mi hijo de 5 años comenzó terapia ocupacional hace 6 meses y los resultados han sido increíbles. Al principio tenía dificultades con la coordinación motora fina y ahora puede abrocharse los botones solo. La terapeuta nos enseñó estrategias para trabajar en casa que han sido muy útiles.",
-                        nombre: "María González",
-                        fecha: fechaActual.toLocaleDateString('es-CL'),
-                        likes: 8
-                    },
-                    {
-                        id: fechaAyer.getTime(),
-                        titulo: "Proceso de diagnóstico en Chile",
-                        categoria: "diagnostico",
-                        experiencia: "Quiero compartir nuestra experiencia con el proceso de diagnóstico. Nos tomó casi un año desde que notamos las primeras señales hasta obtener el diagnóstico formal. El sistema público tiene largas listas de espera, pero finalmente encontramos un neuropediatra excelente que nos orientó muy bien.",
-                        nombre: "Carlos Rodríguez",
-                        fecha: fechaAyer.toLocaleDateString('es-CL'),
-                        likes: 12
-                    },
-                    {
-                        id: fechaAnteayer.getTime(),
-                        titulo: "Adaptaciones en el colegio que funcionaron",
-                        categoria: "educacion",
-                        experiencia: "Mi hija está en 3° básico y hemos implementado varias adaptaciones que han mejorado su experiencia escolar: agenda visual, descansos sensoriales programados y un sistema de comunicación con su profesora. El colegio ha sido muy receptivo y los resultados son muy positivos.",
-                        nombre: "Ana Silva",
-                        fecha: fechaAnteayer.toLocaleDateString('es-CL'),
-                        likes: 15
-                    },
-                    {
-                        id: fechaAnteayer.getTime() - 1000000,
-                        titulo: "Rutinas que nos han ayudado en casa",
-                        categoria: "vida-cotidiana",
-                        experiencia: "Las rutinas visuales han sido nuestro salvavidas. Creamos un tablero con pictogramas para las actividades diarias: levantarse, vestirse, desayunar, etc. Esto ha reducido significativamente la ansiedad y las crisis. También implementamos un sistema de recompensas que motiva mucho a nuestro hijo.",
-                        nombre: "Pedro Martínez",
-                        fecha: fechaAnteayer.toLocaleDateString('es-CL'),
-                        likes: 20
-                    },
-                    {
-                        id: fechaAnteayer.getTime() - 2000000,
-                        titulo: "Conociendo nuestros derechos",
-                        categoria: "derechos",
-                        experiencia: "Recientemente aprendí sobre la Ley de Autismo en Chile y ha sido fundamental para defender los derechos de mi hijo en el sistema de salud y educación. Es importante que todas las familias conozcan esta ley y sepan cómo aplicarla. Recomiendo contactar a las fundaciones que ofrecen asesoría legal gratuita.",
-                        nombre: "Laura Fernández",
-                        fecha: fechaAnteayer.toLocaleDateString('es-CL'),
-                        likes: 18
-                    }
-                ];
-            }
-
-            function obtenerNombreCategoria(categoria) {
-                const categorias = {
-                    'diagnostico': 'Diagnóstico',
-                    'terapias': 'Terapias',
-                    'educacion': 'Educación',
-                    'vida-cotidiana': 'Vida Cotidiana',
-                    'derechos': 'Derechos y Leyes',
-                    'otro': 'Otro'
-                };
-                return categorias[categoria] || 'General';
             }
         });
-
-        // Función global para dar like
-        function darLike(id) {
-            const experiencias = JSON.parse(localStorage.getItem('experiencias_mindtea')) || [];
-            const experiencia = experiencias.find(exp => exp.id === id);
-            
-            if (experiencia) {
-                experiencia.likes = (experiencia.likes || 0) + 1;
-                localStorage.setItem('experiencias_mindtea', JSON.stringify(experiencias));
-                
-                // Actualizar el contador en la interfaz
-                const likeBtn = document.querySelector(`.experiencia-item[data-id="${id}"] .btn-like span`);
-                if (likeBtn) {
-                    likeBtn.textContent = experiencia.likes;
-                }
-            }
-        }
     </script>
 </body>
 </html>
