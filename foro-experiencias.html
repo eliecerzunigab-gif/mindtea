@@ -175,21 +175,20 @@
                 modal.style.display = 'block';
             });
 
-            // Sincronizar manualmente
+            // Actualizar manualmente
             btnSincronizar.addEventListener('click', async function() {
                 btnSincronizar.disabled = true;
-                btnSincronizar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sincronizando...';
+                btnSincronizar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Actualizando...';
                 
                 try {
-                    await foroDB.syncLocalToServer();
                     await cargarExperiencias();
-                    alert('Sincronización completada exitosamente');
+                    alert('Actualización completada exitosamente');
                 } catch (error) {
-                    console.error('Error en sincronización manual:', error);
-                    alert('Error al sincronizar. Inténtalo de nuevo.');
+                    console.error('Error en actualización manual:', error);
+                    alert('Error al actualizar. Inténtalo de nuevo.');
                 } finally {
                     btnSincronizar.disabled = false;
-                    btnSincronizar.innerHTML = '<i class="fas fa-sync-alt"></i> Sincronizar';
+                    btnSincronizar.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar';
                 }
             });
 

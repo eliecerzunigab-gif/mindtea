@@ -27,7 +27,7 @@ class ForoDB {
             console.log('Estado de conexión:', this.isOnline ? 'Online' : 'Offline');
         } catch (error) {
             this.isOnline = false;
-            console.log('API no disponible, usando localStorage');
+            console.log('API no disponible');
         }
     }
 
@@ -38,7 +38,7 @@ class ForoDB {
         }
         
         this.pollingInterval = setInterval(async () => {
-            await this.syncLocalToServer();
+            await this.actualizarPublicaciones();
         }, DB_CONFIG.pollingInterval);
     }
 
@@ -50,76 +50,22 @@ class ForoDB {
         }
     }
 
-    // Sincronizar localStorage con el servidor
-    async syncLocalToServer() {
+    // Actualizar publicaciones desde el servidor
+    async actualizarPublicaciones() {
         if (!this.isOnline) {
             await this.checkConnection();
             if (!this.isOnline) return;
         }
 
         try {
-            const publicacionesLocales = this.obtenerPublicacionesLocal();
-            const publicacionesServidor = await this.obtenerPublicaciones();
-            
-            // Encontrar publicaciones locales que no están en el servidor
-            const publicacionesParaSincronizar = publicacionesLocales.filter(local => 
-                !publicacionesServidor.some(server => server.id === local.id)
-            );
-
-            // Sincronizar cada publicación local con el servidor
-            for (const publicacion of publicacionesParaSincronizar) {
-                await this.crearPublicacion(publicacion);
-            }
-
-            // Actualizar localStorage con datos del servidor
-            const publicacionesActualizadas = await this.obtenerPublicaciones();
-            localStorage.setItem('foro_publicaciones', JSON.stringify(publicacionesActualizadas));
-            
+            // Solo actualizamos la vista si hay cambios
+            const publicaciones = await this.obtenerPublicaciones();
             this.lastSync = new Date();
-            console.log('Sincronización completada:', publicacionesParaSincronizar.length, 'publicaciones sincronizadas');
+            console.log('Actualización automática completada');
             
         } catch (error) {
-            console.error('Error en sincronización:', error);
+            console.error('Error en actualización automática:', error);
         }
-    }
-
-    // Obtener publicaciones con sincronización automática
-    async obtenerPublicacionesConSync() {
-        if (this.isOnline) {
-            try {
-                const publicaciones = await this.obtenerPublicaciones();
-                // Actualizar localStorage con datos del servidor
-                localStorage.setItem('foro_publicaciones', JSON.stringify(publicaciones));
-                return publicaciones;
-            } catch (error) {
-                console.error('Error al obtener publicaciones del servidor:', error);
-                return this.obtenerPublicacionesLocal();
-            }
-        } else {
-            return this.obtenerPublicacionesLocal();
-        }
-    }
-
-    // Crear publicación con sincronización automática
-    async crearPublicacionConSync(publicacion) {
-        let resultado;
-        
-        if (this.isOnline) {
-            try {
-                resultado = await this.crearPublicacion(publicacion);
-                // Actualizar localStorage con la nueva publicación
-                const publicaciones = this.obtenerPublicacionesLocal();
-                publicaciones.push(resultado);
-                localStorage.setItem('foro_publicaciones', JSON.stringify(publicaciones));
-            } catch (error) {
-                console.error('Error al crear publicación en servidor:', error);
-                resultado = this.crearPublicacionLocal(publicacion);
-            }
-        } else {
-            resultado = this.crearPublicacionLocal(publicacion);
-        }
-
-        return resultado;
     }
 
     // Obtener todas las publicaciones
@@ -132,8 +78,7 @@ class ForoDB {
             return await response.json();
         } catch (error) {
             console.error('Error al obtener publicaciones:', error);
-            // Fallback a localStorage si la API no está disponible
-            return this.obtenerPublicacionesLocal();
+            throw error; // No hay fallback, solo base de datos
         }
     }
 
@@ -155,8 +100,7 @@ class ForoDB {
             return await response.json();
         } catch (error) {
             console.error('Error al crear publicación:', error);
-            // Fallback a localStorage
-            return this.crearPublicacionLocal(publicacion);
+            throw error; // No hay fallback, solo base de datos
         }
     }
 
@@ -177,8 +121,7 @@ class ForoDB {
             return await response.json();
         } catch (error) {
             console.error('Error al dar like:', error);
-            // Fallback a localStorage
-            return this.darLikeLocal(postId);
+            throw error; // No hay fallback, solo base de datos
         }
     }
 
@@ -192,8 +135,7 @@ class ForoDB {
             return await response.json();
         } catch (error) {
             console.error('Error al obtener likes:', error);
-            // Fallback a localStorage
-            return this.obtenerLikesLocal(postId);
+            throw error; // No hay fallback, solo base de datos
         }
     }
 
@@ -215,84 +157,7 @@ class ForoDB {
             return await response.json();
         } catch (error) {
             console.error('Error al guardar hashtags:', error);
-            // Fallback a localStorage
-            return this.guardarHashtagsLocal(postId, hashtags);
-        }
-    }
-
-    // Métodos de fallback usando localStorage
-    obtenerPublicacionesLocal() {
-        try {
-            const publicaciones = localStorage.getItem('foro_publicaciones');
-            return publicaciones ? JSON.parse(publicaciones) : [];
-        } catch (error) {
-            console.error('Error al obtener publicaciones de localStorage:', error);
-            return [];
-        }
-    }
-
-    crearPublicacionLocal(publicacion) {
-        try {
-            const publicaciones = this.obtenerPublicacionesLocal();
-            const nuevaPublicacion = {
-                ...publicacion,
-                id: Date.now(),
-                fecha: new Date().toISOString(),
-                likes: 0,
-                hashtags: []
-            };
-            
-            publicaciones.push(nuevaPublicacion);
-            localStorage.setItem('foro_publicaciones', JSON.stringify(publicaciones));
-            return nuevaPublicacion;
-        } catch (error) {
-            console.error('Error al crear publicación en localStorage:', error);
-            return null;
-        }
-    }
-
-    darLikeLocal(postId) {
-        try {
-            const publicaciones = this.obtenerPublicacionesLocal();
-            const publicacion = publicaciones.find(p => p.id === postId);
-            
-            if (publicacion) {
-                publicacion.likes = (publicacion.likes || 0) + 1;
-                localStorage.setItem('foro_publicaciones', JSON.stringify(publicaciones));
-                return { likes: publicacion.likes };
-            }
-            return { likes: 0 };
-        } catch (error) {
-            console.error('Error al dar like en localStorage:', error);
-            return { likes: 0 };
-        }
-    }
-
-    obtenerLikesLocal(postId) {
-        try {
-            const publicaciones = this.obtenerPublicacionesLocal();
-            const publicacion = publicaciones.find(p => p.id === postId);
-            return { likes: publicacion ? (publicacion.likes || 0) : 0 };
-        } catch (error) {
-            console.error('Error al obtener likes de localStorage:', error);
-            return { likes: 0 };
-        }
-    }
-
-    guardarHashtagsLocal(postId, hashtags) {
-        try {
-            const publicaciones = this.obtenerPublicacionesLocal();
-            const publicacion = publicaciones.find(p => p.id === postId);
-            
-            if (publicacion) {
-                publicacion.hashtags = hashtags;
-                localStorage.setItem('foro_publicaciones', JSON.stringify(publicaciones));
-                return { success: true };
-            }
-            return { success: false };
-        } catch (error) {
-            console.error('Error al guardar hashtags en localStorage:', error);
-            return { success: false };
+            throw error; // No hay fallback, solo base de datos
         }
     }
 }
