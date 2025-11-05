@@ -1,7 +1,7 @@
 // Configuración de conexión a la base de datos Heroku
 const DB_CONFIG = {
-    url: 'https://tranquil-lake-75636.herokuapp.com/api',
-    // En producción, esta URL debería apuntar a tu API real en Heroku
+    url: 'https://tranquil-lake-75636-67d7c26c6d1d.herokuapp.com/api',
+    // URL actualizada con el dominio correcto de Heroku
     pollingInterval: 30000, // 30 segundos para actualizaciones automáticas
     maxRetries: 3
 };
